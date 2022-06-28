@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mobile Store</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  
+  <body>
+    <header>
+      <button class="btn cart">
+        <a href="cart/list">
+          <img src="img/cart.png" alt="" class="ic-cart" />
+          View cart</a
+        >
+      </button>
+      <button class="btn cart">
+        <a href="login">
+          <img src="" alt="" class="ic-cart" />
+          LOGIN</a
+        >
+      </button>
+      <h1>Product</h1>
+      <h3>All the available products in our store</h3>
+    </header>
+
+    <div class="container">
+      <div class="card" th:each="prlist : ${prlist}">
+        <div class="card-title">
+          <h3 th:text="${prlist.productName}"></h3>
+        </div>
+        <div class="card-img">
+          <img th:src="@{'data:image/png;base64,'+${prlist.productImage}}" class="img-detail"/>
+        </div>
+        <div class="card-details">
+          <p th:text="${prlist.description}">          
+          </p>
+        </div>
+        <div class="card-info">
+          <p class="price" th:text="${prlist.unitPrice} + USD"> USD</p>
+          <p class="stock" th:text="${prlist.unitsInStock} + Units"></p>
+        </div>
+        <div class="card-action">
+          <button class="btn btn-details">
+            <a th:href="@{'/view_product/' + ${prlist.productID}}">Detail</a>
+          </button>
+          <button class="btn btn-order">
+            <a th:href="@{'/cart/' + ${prlist.productID}}">
+              
+              Order Now</a
+            >
+          </button>
+        </div>
+      </div>
+
+      
+    </div>
+  </body>
+</html>
